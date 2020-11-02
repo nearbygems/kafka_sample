@@ -1,0 +1,28 @@
+package kz.kafka.sample.impl;
+
+import kz.kafka.sample.model.kafka.MessageKafka;
+import kz.kafka.sample.register.KafkaProducer;
+import kz.kafka.sample.util.JsonWorker;
+import kz.kafka.sample.util.KafkaTopic;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Component;
+
+@Component
+public class KafkaProducerIml implements KafkaProducer {
+
+  // region Autowired fields
+  @Autowired
+  private KafkaTemplate<String, String> template;
+  // endregion
+
+  private void send(String topic, String message) {
+    template.send(topic, message);
+  }
+
+  @Override
+  public void sendMessage(MessageKafka kafka) {
+    send(KafkaTopic.MESSAGE, JsonWorker.toJson(kafka));
+  }
+
+}

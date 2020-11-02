@@ -1,5 +1,6 @@
 package kz.kafka.sample.config;
 
+import kz.kafka.sample.util.KafkaUtil;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -14,8 +15,6 @@ import java.util.Map;
 @Configuration
 public class ProducerConfiguration {
 
-  private static final String KAFKA_BROKER = "localhost:9092";
-
   @Bean
   public ProducerFactory<String, String> producerFactory() {
     return new DefaultKafkaProducerFactory<>(producerConfigurations());
@@ -24,7 +23,7 @@ public class ProducerConfiguration {
   @Bean
   public Map<String, Object> producerConfigurations() {
     var configurations = new HashMap<String, Object>();
-    configurations.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_BROKER);
+    configurations.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaUtil.KAFKA_BROKER);
     configurations.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
     configurations.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
     return configurations;

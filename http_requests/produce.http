@@ -1,3 +1,3 @@
-GET http://localhost:8080/kafka/messages
+GET http://localhost:8080/kafka/produce?message=bergen
 
 ###
