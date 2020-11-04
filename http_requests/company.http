@@ -1,0 +1,19 @@
+POST http://localhost:8080/kafka/company
+Content-Type: application/json; charset=UTF-8
+
+{
+  "id": "Zgu@fuM011OSVPXe",
+  "name": "asd",
+  "type": "JSC",
+  "foundationDate": 1604472903120,
+  "headquarters": {
+    "name": "kz",
+    "country": "ald"
+  },
+  "keyPerson": {
+    "surname": "asdasd",
+    "name": "qweqwe"
+  },
+  "link": "qwqewcfec",
+  "isRemoved": false
+}

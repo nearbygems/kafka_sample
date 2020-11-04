@@ -3,6 +3,7 @@ package kz.kafka.sample.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kz.kafka.sample.model.kafka.MessageKafka;
+import kz.kafka.sample.model.kafka.company.CompanyKafka;
 
 import java.util.Objects;
 
@@ -25,6 +26,18 @@ public class JsonWorker {
 
     try {
       return mapper.readValue(json, MessageKafka.class);
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public static CompanyKafka parseCompanyKafka(String json) {
+    if (isNullOrEmpty(json)) {
+      return null;
+    }
+
+    try {
+      return mapper.readValue(json, CompanyKafka.class);
     } catch (JsonProcessingException e) {
       throw new RuntimeException(e);
     }

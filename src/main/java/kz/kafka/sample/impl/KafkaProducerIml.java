@@ -1,6 +1,7 @@
 package kz.kafka.sample.impl;
 
 import kz.kafka.sample.model.kafka.MessageKafka;
+import kz.kafka.sample.model.kafka.company.CompanyKafka;
 import kz.kafka.sample.register.KafkaProducer;
 import kz.kafka.sample.util.JsonWorker;
 import kz.kafka.sample.util.KafkaTopic;
@@ -23,6 +24,11 @@ public class KafkaProducerIml implements KafkaProducer {
   @Override
   public void sendMessage(MessageKafka kafka) {
     send(KafkaTopic.MESSAGE, JsonWorker.toJson(kafka));
+  }
+
+  @Override
+  public void sendMessage(CompanyKafka kafka) {
+    send(KafkaTopic.COMPANY, JsonWorker.toJson(kafka));
   }
 
 }
