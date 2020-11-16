@@ -1,14 +1,14 @@
 package kz.kafka.sample.consumer;
 
-import kz.kafka.sample.model.kafka.company.CreateCompanyKafka;
-import kz.kafka.sample.model.kafka.company.UpdateCompanyKafka;
 import kz.kafka.sample.register.KafkaRegister;
-import kz.kafka.sample.util.JsonWorker;
 import kz.kafka.sample.util.KafkaTopic;
 import kz.kafka.sample.util.KafkaUtil;
+import kz.kafka.sample.util.Serializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 @Component
 public class Consumer {
@@ -20,20 +20,21 @@ public class Consumer {
 
   @KafkaListener(topics = KafkaTopic.MESSAGE, groupId = KafkaUtil.GROUP_ID)
   public void listenMessages(String message) {
-    kafkaRegister.comeCreateMessageKafka(JsonWorker.parseMessageKafka(message));
+
+    var kafka = Objects.requireNonNull(Serializer.parseMessageKafka(message));
+
+    kafkaRegister.comeCreateMessage(kafka.toDto());
   }
 
   @KafkaListener(topics = KafkaTopic.COMPANY, groupId = KafkaUtil.GROUP_ID)
   public void listenCompanies(String company) {
 
-    var kafka = JsonWorker.parseCompanyKafka(company);
+    var kafka = Objects.requireNonNull(Serializer.parseCompanyKafka(company));
 
-    if (kafka instanceof CreateCompanyKafka) {
-      kafkaRegister.comeCreateCompanyKafka((CreateCompanyKafka) kafka);
-    }
-
-    if (kafka instanceof UpdateCompanyKafka) {
-      kafkaRegister.comeUpdateCompanyKafka((UpdateCompanyKafka) kafka);
+    if (kafka.id == null) {
+      kafkaRegister.comeCreateCompany(kafka.toDto());
+    } else {
+      kafkaRegister.comeUpdateCompany(kafka.toDto());
     }
 
   }

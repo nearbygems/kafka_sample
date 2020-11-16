@@ -1,15 +1,14 @@
 package kz.kafka.sample.register;
 
-import kz.kafka.sample.model.kafka.MessageKafka;
-import kz.kafka.sample.model.kafka.company.CreateCompanyKafka;
-import kz.kafka.sample.model.kafka.company.UpdateCompanyKafka;
+import kz.kafka.sample.model.mongo.CompanyDto;
+import kz.kafka.sample.model.mongo.MessageDto;
 
 public interface KafkaRegister {
 
-  void comeCreateMessageKafka(MessageKafka kafka);
+  void comeCreateMessage(MessageDto kafka);
 
-  void comeCreateCompanyKafka(CreateCompanyKafka kafka);
+  void comeCreateCompany(CompanyDto kafka);
 
-  void comeUpdateCompanyKafka(UpdateCompanyKafka kafka);
+  void comeUpdateCompany(CompanyDto kafka);
 
 }

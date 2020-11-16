@@ -1,10 +1,10 @@
 package kz.kafka.sample.impl;
 
+import kz.kafka.sample.model.kafka.CompanyKafka;
 import kz.kafka.sample.model.kafka.MessageKafka;
-import kz.kafka.sample.model.kafka.company.CompanyKafka;
 import kz.kafka.sample.register.KafkaProducer;
-import kz.kafka.sample.util.JsonWorker;
 import kz.kafka.sample.util.KafkaTopic;
+import kz.kafka.sample.util.Serializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
@@ -22,13 +22,11 @@ public class KafkaProducerIml implements KafkaProducer {
   }
 
   @Override
-  public void sendMessage(MessageKafka kafka) {
-    send(KafkaTopic.MESSAGE, JsonWorker.toJson(kafka));
-  }
+  public void sendMessage(MessageKafka kafka) { send(KafkaTopic.MESSAGE, Serializer.toString(kafka)); }
 
   @Override
-  public void sendMessage(CompanyKafka kafka) {
-    send(KafkaTopic.COMPANY, JsonWorker.toJson(kafka));
+  public void sendCompany(CompanyKafka kafka) {
+    send(KafkaTopic.COMPANY, Serializer.toString(kafka));
   }
 
 }

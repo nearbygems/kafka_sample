@@ -1,6 +1,6 @@
 package kz.kafka.sample.controller;
 
-import kz.kafka.sample.model.web.Company;
+import kz.kafka.sample.model.kafka.CompanyKafka;
 import kz.kafka.sample.register.CompanyRegister;
 import kz.kafka.sample.register.MessageRegister;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class KafkaController {
   }
 
   @PostMapping("/company")
-  public void produce(@RequestBody Company company) {
+  public void produce(@RequestBody CompanyKafka company) {
     companyRegister.sendToKafka(company);
   }
 

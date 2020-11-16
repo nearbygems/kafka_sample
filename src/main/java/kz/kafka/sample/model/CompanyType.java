@@ -1,5 +1,10 @@
 package kz.kafka.sample.model;
 
-public enum CompanyType {
+import lombok.ToString;
+
+import java.io.Serializable;
+
+@ToString
+public enum CompanyType implements Serializable {
   JSC,
 }

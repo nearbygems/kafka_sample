@@ -4,10 +4,12 @@ import kz.kafka.sample.model.mongo.MessageDto;
 import kz.kafka.sample.util.Ids;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @ToString
-public class MessageKafka {
+public class MessageKafka implements Serializable {
+
   public String id;
   public String value;
   public Date createdAt;
@@ -19,4 +21,5 @@ public class MessageKafka {
     ret.createdAt = createdAt;
     return ret;
   }
+
 }

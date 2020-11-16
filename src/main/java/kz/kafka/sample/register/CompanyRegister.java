@@ -1,9 +1,9 @@
 package kz.kafka.sample.register;
 
-import kz.kafka.sample.model.web.Company;
+import kz.kafka.sample.model.kafka.CompanyKafka;
 
 public interface CompanyRegister {
 
-  void sendToKafka(Company company);
+  void sendToKafka(CompanyKafka company);
 
 }
