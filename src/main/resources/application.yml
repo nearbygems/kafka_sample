@@ -18,4 +18,4 @@ spring:
 kafka:
   topic: person
   group: ${spring.application.name}
-  startup: false
+  startup: true
